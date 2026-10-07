@@ -4,7 +4,12 @@ import { authOptions } from "@/lib/auth";
 import { CheckCircle2, Shield, Zap, ArrowRight } from "lucide-react";
 
 export default async function HomePage() {
-  const session = await getServerSession(authOptions);
+  let session = null;
+  try {
+    session = await getServerSession(authOptions);
+  } catch (error) {
+    console.error("Failed to retrieve session on HomePage:", error);
+  }
 
   return (
     <div className="relative overflow-hidden bg-white dark:bg-gray-950 min-h-[calc(100vh-4rem)] flex flex-col justify-center">
